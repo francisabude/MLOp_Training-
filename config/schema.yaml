@@ -1,0 +1,25 @@
+columns:
+  - fixed_acidity: float
+  - residual_sugar: float
+  - alcohol: float
+  - density: float
+  - quality_label: string
+
+numerical_columns:
+  - fixed_acidity: float
+  - residual_sugar: float
+  - alcohol: float
+  - density: float
+
+categorical_columns:
+  - quality_label: string
+
+le_columns:
+  - quality_label: string 
+
+transform_columns:
+  - fixed_acidity: float
+  - residual_sugar: float
+  - alcohol: float
+  - density: float
+  - quality_label: string
