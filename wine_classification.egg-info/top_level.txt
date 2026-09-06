@@ -1,1 +1,1 @@
-wine-classification
+wine_classification
