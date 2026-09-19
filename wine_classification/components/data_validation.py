@@ -1,8 +1,9 @@
 import json
+import re
 import sys
-import yaml
 
 import pandas as pd
+from pandas import DataFrame
 from evidently import Report
 from evidently.presets import DataDriftPreset
 
@@ -11,10 +12,8 @@ from wine_classification.entity.config_entity import DataValidationConfig
 from wine_classification.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from wine_classification.logger import logging
 from wine_classification.exception import WineException
-from wine_classification.constants import *
 from wine_classification.constants import SCHEMA_FILE_PATH
-from wine_classification.utils.main_utils import *
-#print([m for m in dir(Report) if not m.startswith('_')])
+from wine_classification.utils.main_utils import read_yaml_file, write_yaml_file
 
 
 class DataValidation:
@@ -40,7 +39,7 @@ class DataValidation:
                     for col in self._schema_config["columns"]
                 ]
                 status = len(dataframe.columns) == len(schema_columns)
-                logging.info(f"Is required column present: [{status}]")
+                logging.info(f"Is required columns present: [{status}]")
                 return status
             except Exception as e:
                 raise WineException(e, sys)
@@ -63,6 +62,9 @@ class DataValidation:
                 if len(missing_numerical_columns) > 0:
                     logging.info(f"Missing numerical column: {missing_numerical_columns}")
 
+                if len(missing_numerical_columns) == 0:
+                    logging.info(f"There are no missing numerical columns.")
+
                 for column in self._schema_config["categorical_columns"]:
                     col_name = list(column.keys())[0] if isinstance(column, dict) else column
                     if col_name not in dataframe_columns:
@@ -70,6 +72,9 @@ class DataValidation:
 
                 if len(missing_categorical_columns) > 0:
                     logging.info(f"Missing categorical column: {missing_categorical_columns}")
+
+                if len(missing_categorical_columns) == 0:
+                    logging.info(f"There are no missing categorical columns.")
 
                 return False if len(missing_categorical_columns) > 0 or len(missing_numerical_columns) > 0 else True
             except Exception as e:
@@ -96,8 +101,7 @@ class DataValidation:
 
                 metrics = json_report.get("metrics", [])
 
-                # In Evidently 0.7.x the identifier is `metric_id` (a string like
-                # "DriftedColumnsCount(drift_share=0.5)"), not `metric_name`.
+               
                 def mid(m):
                     return m.get("metric_id") or m.get("metric_name") or ""
 
@@ -115,7 +119,6 @@ class DataValidation:
                 share = value.get("share") if isinstance(value, dict) else None
 
                 # Pull drift_share threshold out of the metric_id signature, fallback 0.5
-                import re
                 m = re.search(r"drift_share\s*=\s*([0-9.]+)", mid(drifted_col_metric))
                 drift_share = float(m.group(1)) if m else 0.5
 
@@ -155,18 +158,17 @@ class DataValidation:
                 logging.info(f"All required columns present in training dataframe: {status}")
                 if not status:
                     validation_error_msg += f"Columns are missing in training dataframe."
-                status = self.validate_number_of_columns(dataframe=test_df)
 
+                status = self.validate_number_of_columns(dataframe=test_df)
                 logging.info(f"All required columns present in testing dataframe: {status}")
                 if not status:
                     validation_error_msg += f"Columns are missing in test dataframe."
 
                 status = self.is_column_exist(df=train_df)
-
                 if not status:
                     validation_error_msg += f"Columns are missing in training dataframe."
-                status = self.is_column_exist(df=test_df)
 
+                status = self.is_column_exist(df=test_df)
                 if not status:
                     validation_error_msg += f"columns are missing in test dataframe."
 
@@ -195,4 +197,13 @@ class DataValidation:
             except Exception as e:
                 raise WineException(e, sys) from e
         
-        
+if __name__ == "__main__":
+    from wine_classification.components.data_ingestion import DataIngestion
+
+    data_ingestion_artifact = DataIngestion().ingest_data()
+    data_validation = DataValidation(
+        data_ingestion_artifact=data_ingestion_artifact,
+        data_validation_config=DataValidationConfig(),
+    )
+    data_validation_artifact = data_validation.initiate_data_validation()
+    print(data_validation_artifact)

@@ -66,7 +66,3 @@ class DataIngestion:
 
         except Exception as e:
             raise Exception(e, sys) 
-
-if __name__ == "__main__":
-    X = DataIngestion().ingest_data()
-    print(X)

@@ -1,0 +1,50 @@
+metrics:
+- config:
+    drift_share: 0.5
+    type: evidently:metric_v2:DriftedColumnsCount
+  id: 15e89f895b482f9b84ba7274ed18a106
+  metric_name: DriftedColumnsCount(drift_share=0.5)
+  value:
+    count: 0.0
+    share: 0.0
+- config:
+    column: fixed_acidity
+    method: K-S p_value
+    threshold: 0.05
+    type: evidently:metric_v2:ValueDrift
+  id: 9fd9ff012585e26a1767f3976a7a8fc1
+  metric_name: ValueDrift(column=fixed_acidity,method=K-S p_value,threshold=0.05)
+  value: 0.14438339908966644
+- config:
+    column: residual_sugar
+    method: K-S p_value
+    threshold: 0.05
+    type: evidently:metric_v2:ValueDrift
+  id: a6784ba3551dc5c153825df16888968a
+  metric_name: ValueDrift(column=residual_sugar,method=K-S p_value,threshold=0.05)
+  value: 0.7322993405433824
+- config:
+    column: alcohol
+    method: K-S p_value
+    threshold: 0.05
+    type: evidently:metric_v2:ValueDrift
+  id: 1e5f378bfba3a81170c1c3fea15ba4f5
+  metric_name: ValueDrift(column=alcohol,method=K-S p_value,threshold=0.05)
+  value: 0.9874680138859596
+- config:
+    column: density
+    method: K-S p_value
+    threshold: 0.05
+    type: evidently:metric_v2:ValueDrift
+  id: 3580106b2405745f475e779a84e525ef
+  metric_name: ValueDrift(column=density,method=K-S p_value,threshold=0.05)
+  value: 0.7832521474862038
+- config:
+    column: quality_label
+    method: chi-square p_value
+    threshold: 0.05
+    type: evidently:metric_v2:ValueDrift
+  id: 9e895f72980abc3740a2a2c17b113878
+  metric_name: ValueDrift(column=quality_label,method=chi-square p_value,threshold=0.05)
+  value: 0.7610007656331792
+tests: []
