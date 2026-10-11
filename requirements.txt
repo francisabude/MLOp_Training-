@@ -1,2 +1,5 @@
 dill
+mlflow
+neuro_mf
+dagshub
 -e .
