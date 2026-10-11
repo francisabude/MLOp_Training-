@@ -1,0 +1,9 @@
+[ 2026-10-11 19:40:16,871 ] asyncio -DEBUG - Using proactor: IocpProactor
+[ 2026-10-11 19:40:19,780 ] root -INFO - DataIngestion initialized with config: DataIngestionConfig(data_ingestion_dir='artifact\\10_11_2026_19_40_12\\data_ingestion', feature_store_file_path='artifact\\10_11_2026_19_40_12\\data_ingestion\\feature_store\\wine_quality_classification.csv', training_file_path='artifact\\10_11_2026_19_40_12\\data_ingestion\\ingested\\train.csv', testing_file_path='artifact\\10_11_2026_19_40_12\\data_ingestion\\ingested\\test.csv', train_test_split_ratio=0.2)
+[ 2026-10-11 19:40:19,781 ] root -INFO - Starting data ingestion process...
+[ 2026-10-11 19:40:19,794 ] root -INFO - Loaded data with shape: (1000, 5)
+[ 2026-10-11 19:40:19,799 ] root -INFO - Raw data saved to feature store at: artifact\10_11_2026_19_40_12\data_ingestion\feature_store\wine_quality_classification.csv
+[ 2026-10-11 19:40:19,802 ] root -INFO - Train-test split completed.
+[ 2026-10-11 19:40:19,809 ] root -INFO - Training data saved at: artifact\10_11_2026_19_40_12\data_ingestion\ingested\train.csv
+[ 2026-10-11 19:40:19,809 ] root -INFO - Testing data saved at: artifact\10_11_2026_19_40_12\data_ingestion\ingested\test.csv
+[ 2026-10-11 19:40:19,810 ] root -INFO - Data ingestion artifact created: DataIngestionArtifact(feature_store_file_path='artifact\\10_11_2026_19_40_12\\data_ingestion\\feature_store\\wine_quality_classification.csv', trained_file_path='artifact\\10_11_2026_19_40_12\\data_ingestion\\ingested\\train.csv', test_file_path='artifact\\10_11_2026_19_40_12\\data_ingestion\\ingested\\test.csv')

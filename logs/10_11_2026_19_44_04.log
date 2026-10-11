@@ -1,0 +1,39 @@
+[ 2026-10-11 19:44:06,422 ] asyncio -DEBUG - Using proactor: IocpProactor
+[ 2026-10-11 19:44:09,423 ] root -INFO - DataIngestion initialized with config: DataIngestionConfig(data_ingestion_dir='artifact\\10_11_2026_19_44_04\\data_ingestion', feature_store_file_path='artifact\\10_11_2026_19_44_04\\data_ingestion\\feature_store\\wine_quality_classification.csv', training_file_path='artifact\\10_11_2026_19_44_04\\data_ingestion\\ingested\\train.csv', testing_file_path='artifact\\10_11_2026_19_44_04\\data_ingestion\\ingested\\test.csv', train_test_split_ratio=0.2)
+[ 2026-10-11 19:44:09,424 ] root -INFO - Starting data ingestion process...
+[ 2026-10-11 19:44:09,450 ] root -INFO - Loaded data with shape: (1000, 5)
+[ 2026-10-11 19:44:09,460 ] root -INFO - Raw data saved to feature store at: artifact\10_11_2026_19_44_04\data_ingestion\feature_store\wine_quality_classification.csv
+[ 2026-10-11 19:44:09,464 ] root -INFO - Train-test split completed.
+[ 2026-10-11 19:44:09,470 ] root -INFO - Training data saved at: artifact\10_11_2026_19_44_04\data_ingestion\ingested\train.csv
+[ 2026-10-11 19:44:09,470 ] root -INFO - Testing data saved at: artifact\10_11_2026_19_44_04\data_ingestion\ingested\test.csv
+[ 2026-10-11 19:44:09,470 ] root -INFO - Data ingestion artifact created: DataIngestionArtifact(feature_store_file_path='artifact\\10_11_2026_19_44_04\\data_ingestion\\feature_store\\wine_quality_classification.csv', trained_file_path='artifact\\10_11_2026_19_44_04\\data_ingestion\\ingested\\train.csv', test_file_path='artifact\\10_11_2026_19_44_04\\data_ingestion\\ingested\\test.csv')
+[ 2026-10-11 19:44:09,473 ] root -INFO - Starting data validation
+[ 2026-10-11 19:44:09,522 ] root -INFO - Is required columns present: [True]
+[ 2026-10-11 19:44:09,522 ] root -INFO - All required columns present in training dataframe: True
+[ 2026-10-11 19:44:09,522 ] root -INFO - Is required columns present: [True]
+[ 2026-10-11 19:44:09,522 ] root -INFO - All required columns present in testing dataframe: True
+[ 2026-10-11 19:44:09,522 ] root -INFO - There are no missing numerical columns.
+[ 2026-10-11 19:44:09,522 ] root -INFO - There are no missing categorical columns.
+[ 2026-10-11 19:44:09,523 ] root -INFO - There are no missing numerical columns.
+[ 2026-10-11 19:44:09,523 ] root -INFO - There are no missing categorical columns.
+[ 2026-10-11 19:44:09,523 ] root -INFO - drift Started..
+[ 2026-10-11 19:44:10,331 ] root -INFO - 0/5 columns drifted (share=0.000, threshold=0.5). Dataset drift: False
+[ 2026-10-11 19:44:10,332 ] root -INFO - drift ended..
+[ 2026-10-11 19:44:10,332 ] root -INFO - Data validation artifact: DataValidationArtifact(validation_status=True, message='Drift not detected', drift_report_file_path='artifact\\10_11_2026_19_44_04\\data_validation\\drift_report\\report.yaml')
+[ 2026-10-11 19:44:10,337 ] root -INFO - Starting data transformation
+[ 2026-10-11 19:44:10,337 ] root -INFO - Entered get_data_transformer_object method of DataTransformation class
+[ 2026-10-11 19:44:10,338 ] root -INFO - Got numerical cols from schema config
+[ 2026-10-11 19:44:10,338 ] root -INFO - Initialized MinMaxScaler
+[ 2026-10-11 19:44:10,338 ] root -INFO - Numerical features for scaling: ['fixed_acidity', 'residual_sugar', 'alcohol', 'density']
+[ 2026-10-11 19:44:10,338 ] root -INFO - Exited get_data_transformer_object method of DataTransformation class
+[ 2026-10-11 19:44:10,338 ] root -INFO - Got the preprocessor object
+[ 2026-10-11 19:44:10,348 ] root -INFO - Got train features and test features of Training dataset
+[ 2026-10-11 19:44:10,351 ] root -INFO - Got train features and test features of Testing dataset
+[ 2026-10-11 19:44:10,351 ] root -INFO - Applying preprocessing object on training dataframe and testing dataframe
+[ 2026-10-11 19:44:10,409 ] root -INFO - Used the preprocessor object to fit transform the train features
+[ 2026-10-11 19:44:10,412 ] root -INFO - Used the preprocessor object to transform the test features
+[ 2026-10-11 19:44:10,412 ] root -INFO - Created train array and test array
+[ 2026-10-11 19:44:10,412 ] root -INFO - Entered the save_object method of utils
+[ 2026-10-11 19:44:10,423 ] root -INFO - Exited the save_object method of utils
+[ 2026-10-11 19:44:10,432 ] root -INFO - Saved the preprocessor object
+[ 2026-10-11 19:44:10,432 ] root -INFO - Exited initiate_data_transformation method of Data_Transformation class

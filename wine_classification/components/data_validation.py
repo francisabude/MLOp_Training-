@@ -199,11 +199,10 @@ class DataValidation:
         
 if __name__ == "__main__":
     from wine_classification.components.data_ingestion import DataIngestion
+    from wine_classification.components.data_validation import DataValidation
 
     data_ingestion_artifact = DataIngestion().ingest_data()
-    data_validation = DataValidation(
-        data_ingestion_artifact=data_ingestion_artifact,
-        data_validation_config=DataValidationConfig(),
-    )
-    data_validation_artifact = data_validation.initiate_data_validation()
+    data_validation_artifact = DataValidation(data_ingestion_artifact=data_ingestion_artifact,
+                                              data_validation_config=DataValidationConfig()).initiate_data_validation()
+
     print(data_validation_artifact)
